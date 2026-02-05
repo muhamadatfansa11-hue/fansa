@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Happy Valentine Evita ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;font-family:Poppins,sans-serif}
+body{
+  margin:0;
+  min-height:100vh;
+  background:radial-gradient(circle at top,#ff7eb3,#120014);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  color:#fff;
+}
+.card{
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(14px);
+  border-radius:28px;
+  padding:38px 28px;
+  max-width:430px;
+  width:92%;
+  text-align:center;
+  box-shadow:0 30px 60px rgba(0,0,0,.5);
+  animation:fadeUp 1.2s ease;
+}
+@keyframes fadeUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
+h1{font-family:'Playfair Display',serif;font-size:28px;color:#ffd6e8}
+p{font-size:15px;line-height:1.9}
+button{
+  border:none;padding:14px 30px;border-radius:40px;
+  font-size:16px;cursor:pointer;margin-top:14px;transition:.3s
+}
+#start,#yes{
+  background:linear-gradient(135deg,#ff5fa2,#ff9ac8);
+  color:white;box-shadow:0 12px 30px rgba(255,95,162,.5)
+}
+#start:hover,#yes:hover{transform:scale(1.1)}
+.heart{
+  position:absolute;animation:float 6s linear infinite;opacity:.7
+}
+@keyframes float{
+  0%{transform:translateY(110vh) scale(.8);opacity:0}
+  30%{opacity:1}
+  100%{transform:translateY(-10vh) scale(1.3);opacity:0}
+}
+.ring{font-size:72px;animation:ring 1.2s ease infinite alternate}
+@keyframes ring{from{transform:scale(1)}to{transform:scale(1.15)}}
+.confetti{
+  position:absolute;width:8px;height:8px;
+  animation:confetti 4s linear infinite
+}
+@keyframes confetti{
+  0%{transform:translateY(-10vh) rotate(0);opacity:1}
+  100%{transform:translateY(110vh) rotate(720deg);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="screen1">
+  <h1>💌 Untuk Evita Cantik</h1>
+  <p>
+    Hari ini bukan sekadar tanggal,<br>
+    tapi pengingat betapa berharganya kamu.
+  </p>
+  <p>
+    Dari <b>Fansa</b>, dengan rasa yang tulus ❤️
+  </p>
+  <button id="start">Mulai Valentine ❤️</button>
+</div>
+
+<audio id="music" loop>
+  <source src="https://cdn.pixabay.com/audio/2022/10/26/audio_5e1a8d3a43.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const startBtn=document.getElementById("start");
+const music=document.getElementById("music");
+
+startBtn.onclick=()=>{
+  document.documentElement.requestFullscreen?.();
+  music.play();
+  document.body.innerHTML=`
+  <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px;">
+    <div>
+      <h1 style="font-family:Playfair Display;font-size:30px;color:#ffd6e8">
+        Happy Valentine 💖
+      </h1>
+      <p style="font-size:17px;line-height:1.9">
+        Evita Cantik,<br>
+        terima kasih sudah menjadi<br>
+        bagian terindah dalam hidupku.
+      </p>
+      <p style="font-size:18px"><b>
+        Maukah kamu terus bersamaku,<br>
+        hari ini dan seterusnya?
+      </b></p>
+      <button id="yes">Iya ❤️</button>
+    </div>
+  </div>`;
+
+  document.getElementById("yes").onclick=()=>{
+    if(navigator.vibrate) navigator.vibrate([200,100,200]);
+    document.body.innerHTML=`
+    <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px;">
+      <div>
+        <div class="ring">💍</div>
+        <h1 style="font-family:Playfair Display;font-size:34px">
+          Fansa ❤️ Evita
+        </h1>
+        <p style="font-size:18px;line-height:1.9">
+          Selamat Hari Valentine 💕<br>
+          Terima kasih sudah memilihku.<br>
+          Aku mencintaimu.
+        </p>
+        <p style="font-size:26px">❤️❤️❤️</p>
+      </div>
+    </div>`;
+
+    for(let i=0;i<140;i++){
+      const c=document.createElement("div");
+      c.className="confetti";
+      c.style.left=Math.random()*100+"vw";
+      c.style.background=`hsl(${Math.random()*360},100%,70%)`;
+      c.style.animationDuration=(3+Math.random()*3)+"s";
+      document.body.appendChild(c);
+    }
+  };
+};
+
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=(16+Math.random()*24)+"px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),8000);
+},300);
+</script>
+
+</body>
+</html>
